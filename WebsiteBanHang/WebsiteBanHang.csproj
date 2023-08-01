@@ -136,6 +136,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HasCredentialAtrribute.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\MemberController.cs" />
@@ -2109,6 +2110,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\NEWLINK.css" />
+    <Content Include="Content\css\news.css" />
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\ui.css" />
     <Content Include="Content\fonts\fontawesome\css\all.css" />
@@ -2519,10 +2521,12 @@
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Payment\Index.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\News\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Category\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

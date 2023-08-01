@@ -90,5 +90,19 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
 
         }
 
+        public int getNews()
+        {
+            WebsiteBanHangEntities db = new WebsiteBanHangEntities();
+            return db.News.Count();
+
+        }
+
+        public ActionResult Detail(int ID)
+        {
+            WebsiteBanHangEntities db = new WebsiteBanHangEntities();
+            var objNews = db.News.Where(n => n.ID == ID).FirstOrDefault();
+            return View(objNews);
+        }
+
     }
 }

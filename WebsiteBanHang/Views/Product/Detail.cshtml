@@ -94,9 +94,9 @@ return false;
                     </div> <!-- rating-wrap.// -->
 
                     <div class="mb-3">
-                        <var class="price h4">@Model.Price₫</var>
+                        <var class="price h4">@string.Format("{0:N0}", Model.Price)₫</var>
+                    </div>
 
-                    </div> <!-- price-detail-wrap .// -->
 
                     <div class="row">
                         <div class="col-md-8">

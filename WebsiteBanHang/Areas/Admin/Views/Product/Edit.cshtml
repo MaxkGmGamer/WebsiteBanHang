@@ -43,10 +43,17 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => model.BrandId, "Brand ID", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.BrandId, "Thương hiệu", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.BrandId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.RadioButtonFor(model => model.BrandId, "1") <label>Apple</label>
+
+            @Html.RadioButtonFor(model => model.BrandId, "2") <label>Samsung</label>
+            @Html.RadioButtonFor(model => model.BrandId, "3") <label>Xiaomi</label>
+            @Html.RadioButtonFor(model => model.BrandId, "4") <label>Acer</label>
+            @Html.RadioButtonFor(model => model.BrandId, "5") <label>Dell</label>
+            @Html.RadioButtonFor(model => model.BrandId, "6") <label>Tomko</label>
             @Html.ValidationMessageFor(model => model.BrandId, "", new { @class = "text-danger" })
+
         </div>
     </div>
 
@@ -62,7 +69,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Cập nhật" class="btn btn-default" />
         </div>
     </div>
 </div>

@@ -11,7 +11,7 @@
 <link href="~/Content/template/suaxoa.css" rel="stylesheet" />
 
 <div class="content-wrapper">
-    @using (Html.BeginForm("Index","Product", FormMethod.Get))
+    @using (Html.BeginForm("Index", "Product", FormMethod.Get))
     {<div class="container">
             <div class="search">
                 <style>
@@ -105,27 +105,25 @@
     <br />
     <table class="table">
         <tr>
+
             <th>
-               ID   
+                Tên
             </th>
             <th>
-               Tên
+                Hình ảnh
             </th>
             <th>
-              Hình ảnh
+                Hiển thị
             </th>
             <th>
-             Hiển thị 
+                Loại sản phẩm
             </th>
             <th>
-              Loại sản phẩm
-            </th>
-            <th>
-              Thương hiệu
+                Thương hiệu
             </th>
 
             <th>
-               Giá
+                Giá
             </th>
 
             <th></th>
@@ -134,25 +132,81 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ID)
-                </td>
+
                 <td>
                     <a href="@Url.Action("Detail","Product",new {area = "",ID = item.ID})" target="_blank">
                         @Html.DisplayFor(modelItem => item.Name)
                     </a>
                 </td>
                 <td>
-                    <img src="~/Content/images/items/@item.Avatar"width="100">
+                    <a href="@Url.Action("Detail","Product",new{area = "",ID = item.ID})" target="_blank">
+                        <img src="~/Content/images/items/@item.Avatar" width="100">
+                    </a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TypeId)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CategoryId)
-                </td>
                 <th>
-                    @Html.DisplayFor(modelItem => item.BrandId)
+                    @if (item.CategoryId == 3)
+                    {
+                        <a href="@Url.Action("ProductCategory", "Category", new { area = "", ID = item.ID })" target="_blank">
+                            @Html.DisplayFor(modelItem => item.CategoryId)
+                        </a>
+                        @:Máy tính bảng
+                    }
+                    else if (item.CategoryId == 2)
+                    {
+                        <a href="@Url.Action("ProductCategory", "Category", new { area = "", ID = item.CategoryId })" target="_blank">
+
+                            Máy tính
+                        </a>
+                    }
+                    else if (item.CategoryId == 7)
+                    {
+                        <a href="@Url.Action("ProductCategory", "Category", new { area = "", ID = item.CategoryId })" target="_blank">
+
+                            Điện thoại
+                        </a>
+                    }
+
+                    else
+                    {
+                        <a href="@Url.Action("ProductCategory", "Category", new { area = "", ID = item.ID })" target="_blank">
+                            @Html.DisplayFor(modelItem => item.CategoryId)
+                        </a>
+                    }
+
+                </th>
+                <th>
+                    @if (item.BrandId == 1)
+                    {
+                        @:Apple
+                    }
+                    else if (item.BrandId == 2)
+                    {
+                        @:Samsung
+                    }
+                    else if (item.BrandId == 3)
+                    {
+                        @:Xiaomi
+                    }
+                    else if (item.BrandId == 4)
+                    {
+                        @:Acer
+                    }
+                    else if (item.BrandId == 5)
+                    {
+                        @:Dell
+                    }
+                    else if (item.BrandId == 6)
+                    {
+                        @:Tomko
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.BrandId)
+                    }
+
                 </th>
 
                 <td>
@@ -166,10 +220,10 @@
 
                 </td>
             </tr>
-            
+
         }
     </table>
-    
+
     <br />
     <div class="pagination-container">
         <span class="page-info">

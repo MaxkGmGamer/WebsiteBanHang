@@ -64,7 +64,7 @@
                                         </td>
                                         <td>
                                             <div class="price-wrap">
-                                                <var class="price">@item.Product.Price₫</var>
+                                                <var class="price">@string.Format("{0:N0}", @item.Product.Price)₫</var>
                                             </div> <!-- price-wrap .// -->
                                         </td>
                                         <td class="text-right">

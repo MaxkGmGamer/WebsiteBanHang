@@ -13,6 +13,7 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
     public class MemberController : BaseController
     {
         // GET: Admin/Member
+        [HasCredentialAtrribute(RoleCode = "view-add-edit-delete")]
         public ActionResult Index()
         {
             WebsiteBanHangEntities db = new WebsiteBanHangEntities();
@@ -155,6 +156,13 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
 
             }
             return byte2String;
+        }
+
+        public int getMember()
+        {
+            WebsiteBanHangEntities db = new WebsiteBanHangEntities();
+            return db.Members.Count();
+
         }
     }
 }

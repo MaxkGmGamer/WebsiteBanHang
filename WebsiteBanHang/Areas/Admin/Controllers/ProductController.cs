@@ -138,8 +138,14 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
             return RedirectToAction("Index");
 
         }
+        public int getProduct()
+        {
+            WebsiteBanHangEntities db = new WebsiteBanHangEntities();
+            return db.Products.Count();
 
-       
+        }
+        
+
 
     }
 }
