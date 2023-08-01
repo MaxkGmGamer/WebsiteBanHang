@@ -144,7 +144,16 @@
                     </a>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TypeId)
+                    @if (item.TypeId == 1)
+                    {
+
+                        @:Giảm giá
+                    }
+                    else if (item.CategoryId == 2)
+                    {
+
+                        @:Đề xuất
+                    }
                 </td>
                 <th>
                     @if (item.CategoryId == 3)
@@ -210,7 +219,7 @@
                 </th>
 
                 <td>
-                    @Html.DisplayFor(modelItem => item.Price)
+                    <span class="h5">@string.Format("{0:N0}", @item.Price)</span>
                 </td>
 
                 <td>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Linq;
 
 namespace WebsiteBanHang.Areas.Admin.Controllers
 {
@@ -22,6 +23,7 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
             filterContext.Result = new RedirectResult("/Admin/Home/NotCredential");
+            // Lưu url trang trước 
         }
         private List<string> getCredentialByLoogedInMember()
         {
