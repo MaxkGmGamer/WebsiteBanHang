@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,13 +12,36 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
     {
         // GET: Admin/Category
         [HasCredentialAtrribute(RoleCode = "view-add-edit-delete")]
-        public ActionResult Index()
+        public ActionResult Index(string currentFilter, string SearchString, int? page)
         {
             WebsiteBanHangEntities db = new WebsiteBanHangEntities();
 
-            List<Category> danhsachcategory = db.Categories.ToList();
-            return View(danhsachcategory);
+            var danhsachcategory = new List<Category>();
+
+            if (SearchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                SearchString = currentFilter;
+            }
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                danhsachcategory = db.Categories.Where(n => n.Name.Contains(SearchString)).ToList();
+            }
+            else
+            {
+                danhsachcategory = db.Categories.ToList();
+            }
+            ViewBag.CurrentFilter = SearchString;
+            int pageSize = 4;
+            int pageNumber = (page ?? 1);
+            danhsachcategory = danhsachcategory.OrderByDescending(n => n.ID).ToList();
+            return View(danhsachcategory.ToPagedList(pageNumber, pageSize));
         }
+
+
 
         public ActionResult Create()
         {
@@ -31,7 +55,7 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
             var check = db.Categories.FirstOrDefault(s => s.Name == model.Name);
             if (check == null)
             {
-                
+
                 db.Categories.Add(model);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -42,12 +42,13 @@ namespace WebsiteBanHang.Controllers
                     objWebsiteBanHangEntities.Configuration.ValidateOnSaveEnabled = false;
                     objWebsiteBanHangEntities.Users.Add(_user);
                     objWebsiteBanHangEntities.SaveChanges();
-                    return RedirectToAction("Index");
+                    TempData["Register"] = 1;
+                    return RedirectToAction("Login","Home");
                 }
                 else
                 {
-                    ViewBag.error = "Email already exists";
-                    return View();
+                    TempData["Register"] = 0;
+                    return RedirectToAction("Register","Home");
                 }
 
 

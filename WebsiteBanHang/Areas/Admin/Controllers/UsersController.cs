@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -13,12 +14,33 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
     {
         // GET: Admin/Users
         [HasCredentialAtrribute(RoleCode = "view-add-edit-delete")]
-        public ActionResult Index()
+        public ActionResult Index(string currentFilter, string SearchString, int? page)
         {
             WebsiteBanHangEntities db = new WebsiteBanHangEntities();
 
-            List<User> danhsachusers = db.Users.ToList();
-            return View(danhsachusers);
+            var danhsachusers = new List<User>();
+
+            if (SearchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                SearchString = currentFilter;
+            }
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                danhsachusers = db.Users.Where(n => n.FirstName.Contains(SearchString)).ToList();
+            }
+            else
+            {
+                danhsachusers = db.Users.ToList();
+            }
+            ViewBag.CurrentFilter = SearchString;
+            int pageSize = 4;
+            int pageNumber = (page ?? 1);
+            danhsachusers = danhsachusers.OrderByDescending(n => n.ID).ToList();
+            return View(danhsachusers.ToPagedList(pageNumber, pageSize));
         }
         public ActionResult Create()
         {

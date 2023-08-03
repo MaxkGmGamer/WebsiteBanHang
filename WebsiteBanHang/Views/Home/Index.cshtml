@@ -93,10 +93,10 @@
                     <p>Thời lượng có hạn</p>
                 </header><!-- sect-heading -->
                 <div class="timer">
-                    <div> <span class="num">59</span> <small>Sec</small></div>
-                    <div> <span class="num">12</span> <small>Min</small></div>
-                    <div> <span class="num">58</span> <small>Hours</small></div>
-                    <div> <span class="num">02</span> <small>Days</small></div>
+                    <div> <span class="days">0</span> <small>Days</small></div>
+                    <div> <span class="hours">0</span> <small>Hours</small></div>
+                    <div> <span class="minutes">0</span> <small>Min</small></div>
+                    <div> <span class="seconds">0</span> <small>Sec</small></div>
                 </div>
             </div> <!-- col.// -->
             <script>
@@ -106,7 +106,7 @@
                     + 58 * 60 * 1000
                     + 2 * 1000;
 
-                // Hàm cập nhật đồng hồ 
+                // Hàm cập nhật đồng hồ
                 var x = setInterval(function () {
 
                     // Lấy thời gian hiện tại
@@ -122,14 +122,12 @@
                     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
                     // Cập nhật giá trị vào các thẻ span
-                    document.querySelector(".num").innerText = days;
-                    document.querySelector(".num").innerText = hours;
-                    document.querySelector(".num").innerText = minutes;
-                    document.querySelector(".num").innerText = seconds;
+                    document.querySelector(".days").innerText = days;
+                    document.querySelector(".hours").innerText = hours;
+                    document.querySelector(".minutes").innerText = minutes;
+                    document.querySelector(".seconds").innerText = seconds;
 
                 }, 1000);
-
-
             </script>
 
             <div class="row no-gutters items-wrap">

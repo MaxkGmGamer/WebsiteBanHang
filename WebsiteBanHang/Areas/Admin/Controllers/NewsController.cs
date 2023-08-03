@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,12 +12,34 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
     public class NewsController : Controller
     {
         // GET: Admin/News
-        public ActionResult Index()
+        public ActionResult Index(string currentFilter, string SearchString, int? page, int? Id)
         {
             WebsiteBanHangEntities db = new WebsiteBanHangEntities();
 
-            List<News> danhsachnews = db.News.ToList();
-            return View(danhsachnews);
+            var danhsachnews = new List<News>();
+            
+
+            if (SearchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                SearchString = currentFilter;
+            }
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                danhsachnews = db.News.Where(n => n.Title.Contains(SearchString)).ToList();
+            }
+            else
+            {
+                danhsachnews = db.News.ToList();
+            }
+            ViewBag.CurrentFilter = SearchString;
+            int pageSize = 4;
+            int pageNumber = (page ?? 1);
+            danhsachnews = danhsachnews.OrderByDescending(n => n.ID).ToList();
+            return View(danhsachnews.ToPagedList(pageNumber, pageSize));
         }
         public ActionResult Create()
         {

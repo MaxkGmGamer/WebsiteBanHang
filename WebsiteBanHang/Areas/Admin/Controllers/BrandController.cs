@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,14 +12,34 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
     {
         // GET: Admin/Brand
         [HasCredentialAtrribute(RoleCode = "view-add-edit-delete")]
-        public ActionResult Index()
+        public ActionResult Index(string currentFilter, string SearchString, int? page)
         {
             WebsiteBanHangEntities db = new WebsiteBanHangEntities();
 
-            List<Brand> danhsachbrand = db.Brands.ToList();
-            return View(danhsachbrand);
-        }
+            var danhsachbrand = new List<Brand>();
 
+            if (SearchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                SearchString = currentFilter;
+            }
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                danhsachbrand = db.Brands.Where(n => n.Name.Contains(SearchString)).ToList();
+            }
+            else
+            {
+                danhsachbrand = db.Brands.ToList();
+            }
+            ViewBag.CurrentFilter = SearchString;
+            int pageSize = 4;
+            int pageNumber = (page ?? 1);
+            danhsachbrand = danhsachbrand.OrderByDescending(n => n.ID).ToList();
+            return View(danhsachbrand.ToPagedList(pageNumber, pageSize));
+        }
         public ActionResult Create()
         {
 

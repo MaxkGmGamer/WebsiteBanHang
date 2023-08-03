@@ -23,7 +23,7 @@ namespace WebsiteBanHang.Areas.Admin.Controllers
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
             filterContext.Result = new RedirectResult("/Admin/Home/NotCredential");
-            // Lưu url trang trước 
+           
         }
         private List<string> getCredentialByLoogedInMember()
         {
